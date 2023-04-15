@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-import {request} from "../requests/axios";
+import {request} from "../api/axios.js";
 import {ref} from "vue";
 
 const url = 'https://api.uomg.com/api/rand.img3'

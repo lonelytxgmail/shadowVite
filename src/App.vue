@@ -1,6 +1,6 @@
 <template>
     <div class="q-pa fullscreen">
-        <q-layout view="hHh Lpr lff" container >
+        <q-layout view="hHh Lpr lff" container>
             <q-header class="bg-primary text-white" height-hint="98" elevated>
                 <q-toolbar>
                     <q-btn dense flat round icon="menu" @click="drawer = !drawer"/>
@@ -28,16 +28,12 @@
                 <q-scroll-area class="fit">
                     <q-list>
 
-                        <template v-for="(menuItem, index) in menuList" :key="index">
-                            <q-item clickable :active="menuItem.label === 'Outbox'" v-ripple>
-                                <q-item-section avatar>
-                                    <q-icon :name="menuItem.icon"/>
-                                </q-item-section>
+                        <template v-for="(menuItem,index) in menuList" :key="index">
+                            <q-item clickable :active="index===2" v-ripple>
                                 <q-item-section>
-                                    {{ menuItem.label }}
+                                    {{ menuItem.type_name }}
                                 </q-item-section>
                             </q-item>
-                            <q-separator :key="'sep' + index" v-if="menuItem.separator"/>
                         </template>
 
                     </q-list>
@@ -45,7 +41,7 @@
             </q-drawer>
 
             <q-page-container>
-                <router-view/>
+                <router-view @menu="changeMenu"/>
             </q-page-container>
 
         </q-layout>
@@ -56,46 +52,13 @@
 import {ref} from 'vue'
 
 let drawer = ref(true)
-const menuList = [
-    {
-        icon: 'inbox',
-        label: 'Inbox',
-        separator: true
-    },
-    {
-        icon: 'send',
-        label: 'Outbox',
-        separator: false
-    },
-    {
-        icon: 'delete',
-        label: 'Trash',
-        separator: false
-    },
-    {
-        icon: 'error',
-        label: 'Spam',
-        separator: true
-    },
-    {
-        icon: 'settings',
-        label: 'Settings',
-        separator: false
-    },
-    {
-        icon: 'feedback',
-        label: 'Send Feedback',
-        separator: false
-    },
-    {
-        icon: 'help',
-        iconColor: 'primary',
-        label: 'Help',
-        separator: false
-    }
-]
+let menuList = ref(null)
 const toggleLeftDrawer = () => {
     console.log("aa")
+}
+const changeMenu = (value) => {
+    // console.log(value)
+    menuList.value = value
 }
 
 
